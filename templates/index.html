@@ -1,0 +1,910 @@
+{% extends "formative.html" %}
+{% load static %}
+{% block body_block %}
+
+<script type="text/javascript">
+   	window.addEventListener('load', () => {
+	var
+		carousels = document.querySelectorAll('.carousel1')
+	;
+
+	for (var i = 0; i < carousels.length; i++) {
+		carousel(carousels[i]);
+	}
+});
+
+function carousel(root) {
+	var
+		figure = root.querySelector('figure'),
+		nav = root.querySelector('nav'),
+		images = figure.children,
+		n = images.length,
+		gap = root.dataset.gap || 0,
+		bfc = 'bfc' in root.dataset,
+
+		theta =  2 * Math.PI / n,
+		currImage = 0
+	;
+
+	setupCarousel(n, parseFloat(getComputedStyle(images[0]).width));
+	window.addEventListener('resize', () => {
+		setupCarousel(n, parseFloat(getComputedStyle(images[0]).width))
+	});
+
+	setupNavigation();
+
+	function setupCarousel(n, s) {
+		var
+			apothem = s / (2 * Math.tan(Math.PI / n))
+		;
+
+		figure.style.transformOrigin = `50% 50% ${- apothem}px`;
+
+		for (var i = 0; i < n; i++)
+			images[i].style.padding = `${gap}px`;
+		for (i = 1; i < n; i++) {
+			images[i].style.transformOrigin = `50% 50% ${- apothem}px`;
+			images[i].style.transform = `rotateY(${i * theta}rad)`;
+		}
+		if (bfc)
+			for (i = 0; i < n; i++)
+				 images[i].style.backfaceVisibility = 'hidden';
+
+		rotateCarousel(currImage);
+	}
+
+	function setupNavigation() {
+		nav.addEventListener('click', onClick, true);
+
+		function onClick(e) {
+			e.stopPropagation();
+
+			var t = e.target;
+			if (t.tagName.toUpperCase() != 'BUTTON')
+				return;
+
+			if (t.classList.contains('next')) {
+				currImage++;
+			}
+			else {
+				currImage--;
+			}
+
+			rotateCarousel(currImage);
+		}
+
+	}
+
+	function rotateCarousel(imageIndex) {
+		figure.style.transform = `rotateY(${imageIndex * -theta}rad)`;
+	}
+
+}
+
+
+
+
+
+
+
+</script>
+<style>
+
+
+.forget_pwd{
+  display:inline-block;
+  width:100%;
+  white-space:nowrap;
+  text-align:center;
+  margin-top:120px;
+  opacity:1;
+}
+
+#bar{
+  opacity:1;
+  width:65%;
+  height:43px;
+  border:0;
+  box-shadow:inset 0 0 2px 1px blackr;
+  font-size:$form-font-size;
+  padding-left:20px;
+}
+
+.submit{
+  background-color:#0271ad;
+  opacity:1;
+  width:20%;
+  min-width:65px;
+  border:0;
+  margin:0;
+  height:43px;
+  color:white;
+}
+
+.bg{
+
+    background: linear-gradient(rgba(5,5,5, .5),rgba(5,5,5, .5)), url(/static/images/blue.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 260px;
+}
+
+html,
+body {
+  font-family: "Kanit", sans-serif;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: #fcfcfc;
+}
+
+.header {
+  z-index: 99999;
+  width: 100%;
+  height: 70px;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.091);
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  color: #cacaca;
+  font-weight: 100;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+
+.body {
+  height: 100vh;
+  width: 100%;
+  padding-top: 120px;
+  margin-top: 30px;
+}
+
+.container {
+  padding-top: 20px;
+  min-height: 100vh;
+  display: grid;
+  grid-auto-rows: 400px;
+  grid-gap: 30px;
+  grid-template-columns: repeat(3, minmax(200px, 300px));
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: stretch;
+          align-items: stretch;
+}
+
+.carousel-cell {
+  width: 20%;
+  height: 415px;
+  margin-right: 10px;
+  margin-top: 10px;
+  background: #0769e0;
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+@media screen and (max-width: 720px) {
+  .container {
+    grid-template-columns: 1fr;
+    margin: 50px 30px;
+  }
+
+  .carousel-cell {
+    width: 50%;
+
+  }
+}
+
+.card {
+  position: relative;
+  padding: 10px;
+  background: white;
+  display: grid;
+  grid-template-rows: 8fr 1fr 1fr;
+  box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.057);
+  -webkit-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+}
+.card .card-content {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  width: 100%;
+}
+.card .card-content .top-bar {
+  width: calc(100% - 40px);
+  position: absolute;
+  top: 0;
+ text-align: center;
+  padding: 20px;
+}
+
+.card .card-content .img {
+  width: 100%;
+  -webkit-box-pack: bottom;
+          justify-content: bottom;
+  align-content: bottom;
+  text-align: center;
+  padding-top: 50px;
+}
+.card .card-content .img img {
+  max-width: 100%;
+  max-height: 220px;
+}
+.card .card-description {
+  padding-top: 18px;
+  display: flex;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  width: calc(100%-20px);
+}
+.card .card-description .title {
+  text-transform: uppercase;
+  text-align: left;
+}
+.card .card-description .cart {
+  float: right;
+  cursor: pointer;
+}
+.card:hover {
+  -webkit-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
+  -webkit-transform: translateY(-10px);
+          transform: translateY(-10px);
+  box-shadow: 0px 45px 60px 0px rgba(0, 0, 0, 0.087);
+}
+
+
+.gradbt {
+	background-image: linear-gradient(to right,#0575E6 0%, #021B79 100%);
+	border-radius: 5px;
+  box-sizing: border-box;
+	color: #005acf;
+	display: block;
+	font: 1vw 'Oswald', Arial, sans-serif; /*18*/
+	height: 40px;
+	letter-spacing: 1px;
+	margin: 0 auto;
+	padding: 2px;
+	position: relative;
+  text-decoration: none;
+	text-transform: uppercase;
+	width: 100px;
+	z-index: 2;
+}
+
+.gradbt:hover {
+	color: #fff;
+}
+
+.gradbt span {
+	align-items: center;
+	background: white;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+	transition: background .5s ease;
+	width: 100%;
+}
+
+.gradbt:hover span {
+	background: transparent;
+}
+
+
+
+
+
+.site-footer
+{
+   background-color:#3e6bc7;
+  padding:20px;
+  font-size:15px;
+  line-height:24px;
+  color:#f2f2f2;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+.site-footer hr
+{
+  border-top-color:#bbb;
+  opacity:0.5
+}
+.site-footer hr.small
+{
+  margin:20px 0
+}
+.site-footer h6
+{
+  color:#f2f2f2;
+  font-size:16px;
+  text-transform:uppercase;
+  margin-top:5px;
+  letter-spacing:2px
+}
+.site-footer a
+{
+  color:#f2f2f2;
+}
+.site-footer a:hover
+{
+  color:#f2f2f2;
+  text-decoration:none;
+}
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#f2f2f2
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#fcd112;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:3px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+.social-icons
+{
+  padding-left:0;
+  margin-bottom:0;
+  list-style:none
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px
+}
+.social-icons li.title
+{
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#eceeef;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  text-align:center;
+  margin-right:8px;
+  border-radius:100%;
+  -webkit-transition:all .2s linear;
+  -o-transition:all .2s linear;
+  transition:all .2s linear
+}
+.social-icons a:active,.social-icons a:focus,.social-icons a:hover
+{
+  color:#fff;
+  background-color:#29aafe
+}
+.social-icons.size-sm a
+{
+  line-height:34px;
+  height:34px;
+  width:34px;
+  font-size:14px
+}
+.social-icons a.facebook:hover
+{
+  background-color:#3b5998
+}
+.social-icons a.twitter:hover
+{
+  background-color:#00aced
+}
+.social-icons a.linkedin:hover
+{
+  background-color:#007bb6
+}
+.social-icons a.dribbble:hover
+{
+  background-color:#ea4c89
+}
+@media (max-width:767px)
+{
+  .social-icons li.title
+  {
+    display:block;
+    margin-right:0;
+    font-weight:600
+  }
+}
+
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 60%;
+}
+@media (min-width: 1024px) {
+  .header-container {
+    margin: 0 auto;
+    max-width: 1400px;
+    background-color: #E3DAD0;
+  }
+}
+.header__logo {
+
+  width: 190px;
+  opacity: 1;
+  transition: 0.3s ease 0.15s;
+}
+@media (min-width: 770px) {
+  .header__logo {
+    width: 400px;
+
+  }
+}
+
+
+
+
+
+
+</style>
+
+
+  <div class="carousel1" data-gap="20" style=" margin-top: 80px; padding-bottom: 20px; background-color: white; " >
+    <figure>
+        <img src="{% static 'images/10.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/2.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/3.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/4.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/5.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/9.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/7.jfif' %}" alt="" height="400">
+        <img src="{% static 'images/8.jfif' %}" alt="" height="400">
+    </figure>
+    <nav>
+        <button class="nav prev">Prev</button>
+        <button class="nav next">Next</button>
+    </nav>
+</div>
+<br>
+
+
+<div class="paddingpage">
+
+    <div>
+
+        <div style="padding-left: 100px;" class="header-container"><img class="header__logo" id="logo"
+                                                                        src="{% static 'images/logo2.png' %}"
+                                                                        alt="Logo de Feinkoch">
+            <h3 style="margin-right: 200px;"><a href="{% url 'madhubani:madhubani' %}">To Check out out Madhubani
+                collection, Click here.</a></h3></div>
+    </div>
+
+
+    <!-- Flickity HTML init -->
+
+    <div style="width: 50%; float: left; padding-left: 50px; padding-top: 30px;">
+        <p style="font-family: 'Noto Serif', serif; font-size: 28px;">Paintings</p>
+    </div>
+
+    <div style="width: 50%; float: right;  padding-left: 490px; padding-bottom:10px; padding-top: 30px; margin: 0;">
+        <a href="{% url 'dynamicnav:dyna' %}" class="gradbt">
+            <span>View All</span>
+        </a>
+    </div>
+
+    <hr style="background-color: grey; width: 96%; height:1px;">
+    <!-- Flickity HTML init -->
+    <div style="background-color:#f2f2f2; margin-top: -20px; padding-top: 20px; padding-bottom: 60px; width: 96%; margin-left:27px; padding-left:0; padding-right:0;">
+        <div class="carousel" data-flickity='{ "groupCells": true }'>
+            {% for i in abs_painting %}
+            <a href="/dyna/abstract_description/{{i.painting_id}}" style="text-decoration:none; color: black;">
+                <div class="carousel-cell">
+                    <div class='card'>
+                        <div class='card-content'>
+                            <div class='top-bar'><span>{{i.name}}</span></div>
+                            <div class='img'>
+                                <img src="/media/{{i.image}}">
+                            </div>
+                        </div>
+                        <div class='card-description'>
+                            <div class='title'>
+                                &#8377; {{i.price}}
+                            </div>
+                            <div class='cart'>
+                                <a href="#"><span class='lnr lnr-cart' style="padding-right:20px;"></span></a>
+                            </div>
+
+                        </div>
+                        <div class='title'>
+                            Artist: {{i.artist}}
+                        </div>
+                        <div class='title'>
+                            {{i.small_description}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+<!--    <div class="jumbotron">-->
+<!--        <center>-->
+
+
+<!--            <a href="/price_filter/">-->
+<!--                <p>{{ abs_painting.price }}</p>-->
+
+<!--            </a>-->
+
+
+            
+            
+            
+            
+            
+            
+<!--    <form>-->
+<!--  <input type="radio" id="male" name="thousand" value="male">-->
+<!--  <label for="male">Below 1000</label><br>-->
+<!--  <input type="radio" id="female" name="gender" value="female">-->
+<!--  <label for="female">Below 10000</label><br>-->
+<!--  <input type="radio" id="other" name="gender" value="other">-->
+<!--  <label for="other">Below 20000</label>-->
+<!--</form>-->
+<!--            </center>-->
+<!--        </div>-->
+
+
+
+
+    <div style="width: 50%; float: left; padding-left: 50px;">
+        <p style="font-family: 'Noto Serif', serif; font-size: 28px;">Photographs</p>
+    </div>
+
+    <div style="width: 50%; float: right;  padding-left: 490px; padding-bottom: 10px;">
+        <a href="{% url 'photographs:Architectural' %}" class="gradbt">
+            <span>View All</span>
+        </a>
+    </div>
+
+    <hr style="background-color: grey; width: 96%; height:1px;">
+
+
+    <!-- Flickity HTML init -->
+    <div style="background-color:#f2f2f2; margin-top: -20px; padding-top: 20px; padding-bottom: 60px; width: 96%; margin-left:27px; padding-left:0; padding-right:0;">
+        <div class="carousel" data-flickity='{ "groupCells": true }'>
+            {% for i in archi %}
+            <a href="/architectural/architectural_description/{{i.painting_id}}" style="text-decoration:none; color: black;">
+                <div class="carousel-cell">
+                    <div class='card'>
+                        <div class='card-content'>
+                            <div class='top-bar'><span>{{i.name}}</span></div>
+                            <div class='img'>
+                                <img src="/media/{{i.image}}">
+                            </div>
+                        </div>
+                        <div class='card-description'>
+                            <div class='title'>
+                                &#8377; {{i.price}}
+                            </div>
+                            <div class='cart'>
+                                <a href=""><span class='lnr lnr-cart' style="padding-right:20px;"></span></a>
+                            </div>
+                        </div>
+                        <div class='title'>
+                            Artist: {{i.artist}}
+                        </div>
+                        <div class='title'>
+                            {{i.small_description}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div style="width: 50%; float: left; padding-left: 50px;">
+        <p style="font-family: 'Noto Serif', serif; font-size: 28px;">Posters</p>
+    </div>
+
+    <div style="width: 50%; float: right;  padding-left: 490px; padding-bottom: 10px;">
+        <a href="{% url 'forposters:corporatePosters' %}" class="gradbt">
+            <span>View All</span>
+        </a>
+    </div>
+
+    <hr style="background-color: grey; width: 96%; height:1px;">
+    <!-- Flickity HTML init -->
+    <div style="background-color:#f2f2f2; margin-top: -20px; padding-top: 20px; padding-bottom: 60px; width: 96%; margin-left:27px; padding-left:0; padding-right:0;">
+        <div class="carousel" data-flickity='{ "groupCells": true }'>
+            {% for i in show_poster %}
+            <a href="/corporate/show_description/{{i.painting_id}}" style="text-decoration:none; color: black;">
+                <div class="carousel-cell">
+                    <div class='card'>
+                        <div class='card-content'>
+                            <div class='top-bar'><span>{{i.name}}</span></div>
+                            <div class='img'>
+                                <img src="/media/{{i.image}}">
+                            </div>
+                        </div>
+                        <div class='card-description'>
+                            <div class='title'>
+                                &#8377; {{i.price}}
+                            </div>
+                            <div class='cart'>
+                                <a href=""><span class='lnr lnr-cart' style="padding-right:20px;"></span></a>
+                            </div>
+                        </div>
+                        <div class='title'>
+                            Artist: {{i.artist}}
+                        </div>
+                        <div class='title'>
+                            {{i.small_description}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div style="background-color: #cdedfd; background-image: linear-gradient(319deg, #cdedfd 0%, #ffec82 37%, #ffcfd2 100%); padding: 10px;">
+        <div class="row">
+            <div class="col-md-7" >
+                <p style="font-size: 60px; text-align: center;">The Artisan Auction</p>
+                <p style="font-size:24px; text-align: center;">The Saturday evening black-tie gala featuring our grand
+                    live auction.</p>
+                <p style="font-size:16px; text-align: center;">All you have to do is bid your price based on the current
+                    price in the auction and we will let you know via email if you got that painting.</p>
+                <p style=" font-size:16px; text-align: center;"><u><a href="{% url 'auction:auction' %}"
+                                                                      style=" text-decoration: none; color: black;">Click
+                    here to see the painting of the day</a></u></p>
+            </div>
+            <div class="col-md-5">
+                <img src="/static/images/auction4.png" alt="" width="70%">
+
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+
+    <div style="width: 50%; float: left; padding-left: 50px;">
+        <p style="font-family: 'Noto Serif', serif; font-size: 28px;">Frames</p>
+    </div>
+
+    <div style="width: 50%; float: right;  padding-left: 490px; padding-bottom: 10px;">
+        <a href="{% url 'frames:DeepSet1' %}" class="gradbt">
+            <span>View All</span>
+        </a>
+    </div>
+
+    <hr style="background-color: grey; width: 96%; height:1px;">
+    <!-- Flickity HTML init -->
+    <div style="background-color:#f2f2f2; margin-top: -20px; padding-top: 20px; padding-bottom: 60px; width: 96%; margin-left:27px; padding-left:0; padding-right:0;">
+        <div class="carousel" data-flickity='{ "groupCells": true }'>
+            {% for i in floatingframe %}
+            <a href="/deepset/table_description/{{i.painting_id}}" style="text-decoration:none; color: black;">
+                <div class="carousel-cell">
+                    <div class='card'>
+                        <div class='card-content'>
+                            <div class='top-bar'><span>{{i.name}}</span></div>
+                            <div class='img'>
+                                <img src="/media/{{i.image}}">
+                            </div>
+                        </div>
+                        <div class='card-description'>
+                            <div class='title'>
+                                &#8377; {{i.price}}
+                            </div>
+                            <div class='cart'>
+                                <a href=""><span class='lnr lnr-cart' style="padding-right:20px;"></span></a>
+                            </div>
+                        </div>
+                        <div class='title'>
+                            Artist: {{i.artist}}
+                        </div>
+                        <div class='title'>
+                            {{i.small_description}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div style=" position: relative; text-align: center; color: white;" class="bg">
+        <p style="font-family: 'Merriweather Sans', sans-serif;  position: absolute; top: 10%; left: 23%; font-size: 2.3vw;">
+            THE BEST OF ARTISAN DELIVERED TO YOUR INBOX</p>
+        <p style="font-family: 'Merriweather Sans', sans-serif; position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size: 1vw;">
+
+
+        <form method="POST"
+              action="https://blogspot.us10.list-manage.com/subscribe/post?u=e523e7b2f7d50dac4ecdfc863&amp;id=88faf15713"
+              id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_blank" novalidate style="padding-top: 120px; color: black;">
+            {% csrf_token %}
+            <div id="mc_embed_signup_scroll">
+                <input type="email" id="bar" value="" name="EMAIL" class="email" placeholder="email address" required>
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <input type="text" name="b_e523e7b2f7d50dac4ecdfc863_88faf15713" tabindex="-1" value=""
+                           style="color: black;">
+                </div>
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                       class="button submit">
+
+            </div>
+        </form>
+        <p style="font-family: 'Merriweather Sans', sans-serif; position: absolute; top: 80%; left: 50%; transform: translate(-50%, -50%); font-size: 0.8vw;">
+            By signing up for this email, you are agreeing to receive news, offers, and information from Artisan
+            Partners, LLC and our partners. Click here to visit our Privacy Policy. Easy unsubscribe links
+            are provided in every email.</p>
+    </div>
+
+
+</div>
+
+<footer class="site-footer">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <h6>About us</h6>
+            <p class="text-justify" style="font-family: 'Signika', sans-serif;">At ARTISAN we, Astle, Shania & Yvonne,
+                aim to be inclusive at both onsite
+                and online- where diverse cultural, artistic, social, and political positions are welcome. We’re
+                committed to sharing the most thought-provoking modern and contemporary art, and hope you will join
+                us in exploring the art, ideas, and issues of our time. </p>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+
+        <div class="col-xs-6 col-md-2">
+            <h6>Categories</h6>
+            <ul class="footer-links" style="font-family: 'Signika', sans-serif;">
+                <li><a href="">Abstract</a></li>
+                <li><a href="">Wildlife</a></li>
+                <li><a href="">Nature</a></li>
+                <li><a href="">Movies</a></li>
+            </ul>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links" style="font-family: 'Signika', sans-serif;">
+                <li><a href="{% url 'contactus:contactus' %}">Contact Us/ Feedback</a></li>
+                <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                <li><a href="{% url 'firsthello:privacy' %}">Privacy Policy</a></li>
+                <li><a href="{% url 'firsthello:aboutus' %}">About Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+
+        <center>
+            <div class="col-md-12 col-sm-6 col-xs-12">
+                <ul class="social-icons">
+                    <li><a class="facebook" href="https://www.facebook.com/beartofficial"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a class="twitter" href="https://twitter.com/MuseumModernArt/status/1307072923744731138"><i
+                            class="fa fa-twitter"></i></a></li>
+                    <li><a class="dribbble" href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                    <li><a class="linkedin" href="https://in.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+                <br>
+                <p class="copyright-text" style="font-family: 'Quicksand', sans-serif;">Copyright &copy; 2020 All Rights
+                    Reserved by
+                    <a href="#">Artisian</a>.
+                </p>
+            </div>
+
+        </center>
+
+    </div>
+
+
+</footer>
+  
+
+
+{% endblock %}
+{% block js %}
+
+<script>
+
+function ranger() {
+    var value1;
+    var value2;
+
+  value1 = document.getElementById("min_price").value;
+
+  value2 =  document.getElementById("max_price").value;
+
+  value1 = parseFloat(value1);
+  value2 = parseFloat(value2);
+
+    console.log(value2)
+    console.log(value1)
+}
+</script>
+{% endblock %}
