@@ -28,53 +28,93 @@
         }
 
 
-h1, h2, h3, h4, h5 , h6 { font-family: 'Muli', sans-serif; font-weight:normal; }
-
-h1 {
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
-    margin:10px 0 20px 0;
+		/* Form */
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 300px;
+  margin: 0 auto 100px;
+  padding: 30px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+}
+.form .thumbnail {
+  background: url("/static/images/profile.jpg");
+  background-size: 148px 148px;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 30px;
+  padding: 50px 30px;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  box-sizing: border-box;
+}
+.form .thumbnail img {
+  display: block;
+  width: 100%;
 }
 
-h2 {
-    margin:30px 0 20px;
+.form button {
+
+}
+
+.form .button2 {
+  outline: 0;
+  width: 48%;
+  border: 0;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  margin-top:5px;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #EF3B3A;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 
-
-
-/* forms */
-form {
-    overflow:auto;
+/* END Form */
+/* Demo Purposes */
+body {
+  background: #ccc;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-form p {
-    width:100%;
-    overflow:auto;
-}
-
-label {
-
-    clear:both;
-    color:#333;
-    margin-bottom:4px;
-}
-input, textarea {
-    clear:both;
-
-    margin:0 0 10px;
-    background:#efefef;
-    border:0;
-    padding:6px 10px;
-    font-size:14px;
-}
-input[type=submit], a.button {
-    font-weight:bold;
-    background:#12c064;
-    color:#fff;
-    font-size:14px;
-    text-transform:uppercase;
-}
 
 
 /* social-auth */
@@ -96,6 +136,58 @@ input[type=submit], a.button {
 
 
 
+         #btn-grad {background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC  51%, #02AAB0  100%)}
+         #btn-grad {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+            outline: 0;
+
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+          }
+
+          #btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+.Social{
+  width: 30%;
+  margin-bottom: 20px;
+
+}
+
+.facebook{
+  background-color: #4E6496;
+}
+
+.twitter{
+ background-color: #56A0DE;
+}
+
+.google{
+  background-color: #DC4C30;
+}
+
+
 
 </style>
 {% endblock %}
@@ -112,27 +204,34 @@ input[type=submit], a.button {
       Please try again.
     </p>
   {% else %}
-    <p>Please, use the following form to log-in. If you don't have an account <a href="{% url "register" %}">register here</a></p>
   {% endif %}
-  <div class="login-form">
-    <form action="{% url 'login' %}" method="post">
-      {{ form.as_p }}
+
+
+
+
+<div class="login-form">
+
+</div><div class="container">
+
+</div>
+<div class="form">
+  <div class="thumbnail"></div>
+      <p class="message">Not registered? <a href="{% url 'register' %}">Create an account</a></p>
+  <form action="{% url 'login' %}" method="post">
+     {{ form.as_p }}
       {% csrf_token %}
       <input type="hidden" name="next" value="{{ next }}" />
-      <p><input type="submit" value="Log-in"></p>
-    </form>
-    <p><a href="{% url 'password_reset' %}">Forgotten your password?</a></p>
-  </div>
-  <div class="social">
-    <ul>
-      <li class="facebook" style="width: 30%;">
-        <a href="{% url 'social:begin' 'facebook' %}">Sign in with Facebook</a>
-      </li>
-      <li class="google" style="width: 30%;">
-        <a href="{% url 'social:begin' 'google-oauth2' %}">Sign in with Google</a>
-      </li>
-    </ul>
-  </div>
+    <button type="submit" value="Log-in" id="btn-grad">Login</button>
+
+
+      <button class = "Social  twitter"><a href="{% url 'social:begin' 'facebook' %}" style="text-decoration:none; color: white;">Facebook</a></button>
+      <button class = "Social google"><a href="{% url 'social:begin' 'google-oauth2' %}" style="text-decoration:none; color: white;">Google</a></button>
+
+
+  </form>
+  <p class="message"> <a href="{% url 'password_reset' %}">Forgot Password ?</a></p>
+
+</div>
 
 </center>
 
