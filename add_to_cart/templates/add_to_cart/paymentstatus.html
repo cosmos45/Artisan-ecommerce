@@ -3,6 +3,7 @@
 
 {% block head %}
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.2.61/jspdf.min.js"></script>pyth
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
@@ -33,6 +34,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <title>The Artisan</title>
+    <link rel="icon" href="/static/images/icon.ico" type="image/x-icon">
 
     <style>
         .navbar{
@@ -271,7 +275,12 @@ p.error {
 }
 
 
-
+.table-bordered {
+  border:1px solid black
+}
+ td{
+  border:1px solid black
+}
 
 
     </style>
@@ -298,14 +307,14 @@ p.error {
 
 
 
-<div class="container" style="margin-top:100px;">
+<div class="container" style="margin-top:60px;">
 
-<div class="col" style="margin-top: 100px;">
+<div class="col" style="margin-top: 60px;">
+
+    {% if response.RESPCODE == '01' %}
 <center>
   <h3>Payment status for your order ID.{{response.ORDERID}}</h3>
 </center>
-    {% if response.RESPCODE == '01' %}
-
     <div class="success-checkmark">
   <div class="check-icon">
     <span class="icon-line line-tip"></span>
@@ -314,13 +323,159 @@ p.error {
     <div class="icon-fix"></div>
   </div>
 </div>
+    <center>
+        <h2>The Artisan</h2>
+    <h5>Thankyou for shopping with us.</h5>
+
+    </center>
+
+    <div class="customers">
+	<div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+
+            <tr>
+                <th></th>
+                <th>The artisan</th>
+                <th></th>
+            </tr>
+            </thead>
+        </table>
+
+		<table class="table table-hover">
+
+
+			<thead>
+
+				<tr>
+					<th style="background-color: #928989; color; white;">Product Name</th>
+					<th style="background-color: #928989; color; white;">Quantity</th>
+					<th style="background-color: #928989; color; white;">Price</th>
+				</tr>
+			</thead>
+			<tbody id="items">
+
+
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+ <button onclick="javascript:demoFromHTML();">PDF</button>
 <center>
- <p class="success">Wohoo! Payment Successful</p>
-    <br><br>
+
     <h3>Click <a href="{% url 'firsthello:home' %}">here </a> for <strong>Home</strong> page </h3>
 </center>
 
 
+
+<script>
+
+function demoFromHTML() {
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    source = $('.customers')[0];
+
+
+    specialElementHandlers = {
+
+        '#bypassme': function (element, renderer) {
+
+            return true
+        }
+    };
+    margins = {
+        top: 80,
+        bottom: 60,
+        left: 10,
+        width: 700
+    };
+
+    pdf.fromHTML(
+    source,
+    margins.left,
+    margins.top, {
+        'width': margins.width,
+        'elementHandlers': specialElementHandlers
+    },
+
+    function (dispose) {
+        pdf.save('Test.pdf');
+    }, margins);
+}
+
+
+if(localStorage.getItem('demn') == null) {
+  var demn = {};
+
+}
+else {
+  demn = JSON.parse(localStorage.getItem('demn'));
+
+
+
+}
+
+
+
+
+if(localStorage.getItem('shit') == null) {
+  var shit = {};
+
+}
+else {
+  shit = JSON.parse(localStorage.getItem('shit'));
+
+
+
+}
+
+
+
+
+
+
+console.log(demn);
+console.log(shit);
+sum = 0;
+totalPrice = 0;
+
+for (item in demn) {
+
+  let name = demn[item][1];
+  let qty = demn[item][0];
+  let itemPrice = demn[item][2];
+  sum = sum + qty;
+  totalPrice = totalPrice + qty * itemPrice;
+  totalPricelast = totalPrice + 55
+  mystr = `<tr ng-repeat-end="" ><td>
+      ${name}</td> <td> ${qty}</td>
+     <td> ${totalPrice}</td></tr>`
+  $('#items').append(mystr);
+
+}
+
+
+
+for (item in shit) {
+
+  let name = shit[item][1];
+  let qty = shit[item][0];
+  let itemPrice = shit[item][2];
+  sum = sum + qty;
+  totalPrice = totalPrice + qty * itemPrice;
+  totalPricelast = totalPrice + 55
+  mystr = `<td>
+      ${name}</td> <td> ${itemPrice}</td>
+     <td> ${qty}</td>`
+  $('#items').append(mystr);
+
+}
+
+let x = document.querySelector("h4").innerHTML;
+console.log(x)
+
+</script>
 
 
 
@@ -348,34 +503,8 @@ p.error {
 	</div>
 
 
-
-
-
 {% endblock %}
 
 
 
 
-{% block js %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% endblock %}

@@ -12,8 +12,9 @@ from .models import Orders, OrderUpdate
 import json
 
 MERCHANT_KEY = 'lsPfJ%w6NHvXhGz1'
-# MERCHANT_KEY = '54TZc7g7tugpf6P_'
 
+
+# MERCHANT_KEY = '54TZc7g7tugpf6P_'
 
 
 #
@@ -64,14 +65,14 @@ def cart(request):
         order.save()
 
         thank = True
-        update = OrderUpdate(order_id=order.order_id, update_desc="The order has been placed")
+        update = OrderUpdate(order_id=order.order_id, address=order.address, update_desc="The order has been placed")
         update.save()
         id = order.order_id
         # return render(request, "add_to_cart/cart.html", {'thank': thank, 'id': id})
 
         param_dict = {
             'MID': 'BYihPv14634030130981',
-             #'MID': 'gwpJSJ13278899053257',
+            # 'MID': 'gwpJSJ13278899053257',
             'ORDER_ID': str(order.order_id),
             'TXN_AMOUNT': str(amount),
             'CUST_ID': email,
@@ -107,8 +108,8 @@ def handlerequest(request):
     return render(request, "add_to_cart/paymentstatus.html", {'response': response_dict})
 
 
-
 def yourorders(request):
+    address = Orders.objects.all()
     if request.method == "POST":
         orderId = request.POST.get('orderId', '')
         email = request.POST.get('email', '')
@@ -118,7 +119,8 @@ def yourorders(request):
                 update = OrderUpdate.objects.filter(order_id=orderId)
                 updates = []
                 for item in update:
-                    updates.append({'text': item.update_desc, 'time': item.timestamp})
+                    updates.append({'text': item.update_desc, 'time': item.timestamp, 'orderid': item.order_id,
+                                    'address': item.address})
                     response = json.dumps({"status": "success", "updates": updates, "itemsJson": order[0].items_json},
                                           default=str)
                 return HttpResponse(response)
@@ -127,5 +129,4 @@ def yourorders(request):
         except Exception as e:
             return HttpResponse('{"status":"error"}')
 
-
-    return render(request, "add_to_cart/yourorders.html")
+    return render(request, "add_to_cart/yourorders.html", {"address": address})

@@ -220,6 +220,24 @@
   font-size: 1em;
 }
 
+.sectionHead1{
+
+  padding: 1em 1.5em;
+
+  border-bottom: 1px solid #D0D0D0;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.sectionHead3{
+
+  padding: 1em 1.5em;
+
+  border-top: 1px solid #D0D0D0;
+  font-weight: bold;
+  font-size: 1em;
+}
+
 
 form ul li {
   float: left;
@@ -362,50 +380,70 @@ form ul input[type="submit"] {
         <h2 class="sectionHead">Receipt</h2>
         <div class="row" style="margin: 10px;">
         <div class="col-md-12">
-          <p>Item Name <span style="float: right;">35.00</span></p>
-          <hr>
-        </div>
+            <div class="row">
+                <div class="col-md-8 sectionHead1" >
+                   Name
+                </div>
+                <div class="col-md-2 sectionHead1">
+                    Qty
+                </div>
+                <div class="col-md-2 sectionHead1">
+                    Price
+                </div>
+            </div>
+            <br>
+            <br>
+          <div id="items">
+
+          </div>
+
+
       </div>
-       <div class="row" style="margin: 10px;">
-        <div class="col-md-12">
-          <p>Item Name <span style="float: right;">35.00</span></p>
-          <hr>
         </div>
+
+
+      <div class="row sectionHead3" >
+
+          <div class="col-md-8 ">
+              Subtotal
+          </div>
+          <div class="col-md-2">
+
+          </div>
+          <div id="totalPrice" class="col-md-2">
+
+          </div>
+
       </div>
-       <div class="row" style="margin: 10px;">
-        <div class="col-md-12">
-          <p>Item Name <span style="float: right;">35.00</span></p>
-          <hr>
-        </div>
+
+      <div class="row sectionHead3">
+
+             <div class="col-md-8 ">
+              Delivery charges
+          </div>
+          <div class="col-md-2">
+
+          </div>
+          <div class="col-md-2">
+              55.00
+          </div>
       </div>
-       <div class="row" style="margin: 10px;">
-        <div class="col-md-12">
-          <p>Item Name <span style="float: right;">35.00</span></p>
-          <hr>
-        </div>
+
+      <div class="row sectionHead3">
+             <div class="col-md-8 ">
+              Total
+          </div>
+          <div class="col-md-2">
+
+          </div>
+          <div id="totalPricelast" class="col-md-2">
+
+          </div>
+
       </div>
 
 
-      <div class="row" style="margin: 10px;">
-        <div class="col-md-12">
 
-          <li style="padding-left: 20px; font-size: 16px;">Subtotal <span style="float: right;" id="totalPrice"></span></li>
-        </div>
-      </div>
-
-      <div class="row" style="margin: 10px;">
-        <div class="col-md-12">
-          <p style="padding-left: 20px; font-size: 16px;">Delivery Charges <span style="float: right;">55.00</span></p>
-        </div>
-      </div>
-
-      <div class="row" style="margin: 10px;">
-        <div class="col-md-12">
-          <p style="padding-left: 20px; font-size: 16px;">Total <span style="float: right;">55.00</span></p>
-        </div>
-      </div>
-
-      </div>
 
 
     </div>
@@ -498,19 +536,36 @@ for (item in demn) {
   let itemPrice = demn[item][2];
   sum = sum + qty;
   totalPrice = totalPrice + qty * itemPrice;
-  mystr = `<li  class="list-group-item d-flex justify-content-between align-items-center">
-      ${name}
-      <span class="badge badge-primary badge-pill">${qty}</span>
-  </li>`
+  totalPricelast = totalPrice + 55;
+  mystr = `<div class="row" style="font-size: 1em;"> <div class="col-md-8"> ${name} </div> <div class="col-md-2"> ${qty} </div> <div class="col-md-2"> ${itemPrice}</div> </div><br>`
+
+
   $('#items').append(mystr);
 
 }
+
+
+for (item in shit) {
+
+  let name = shit[item][1];
+  let qty = shit[item][0];
+  let itemPrice = shit[item][2];
+  sum = sum + qty;
+  totalPrice = totalPrice + qty * itemPrice;
+  totalPricelast = totalPrice + 55;
+  mystr = `<div class="row" style="font-size: 1em;"> <div class="col-md-8"> ${name} </div> <div class="col-md-2"> ${qty} </div> <div class="col-md-2"> ${itemPrice}</div> </div><br>`
+$('#items').append(mystr);
+
+}
+
+
 
 }
 
 
  document.getElementById('demn').innerHTML = sum;
  document.getElementById('totalPrice').innerHTML = totalPrice;
+ document.getElementById('totalPricelast').innerHTML = totalPricelast;
  $('#itemsJson').val(JSON.stringify(demn));
  {% if thank %}
  alert('Wohooo! Your order has been placed. Your order is {{id}}. Use it to track your order')
@@ -520,7 +575,10 @@ for (item in demn) {
 
  {% endif %}
 
- $('#amount').val($('#totalPrice').html())
+ $('#amount').val($('#totalPricelast').html())
+
+
+
 
 </script>
 
