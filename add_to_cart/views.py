@@ -11,7 +11,7 @@ from django.db.models import Case, When
 from .models import Orders, OrderUpdate
 import json
 
-MERCHANT_KEY = 'lsPfJ%w6NHvXhGz1'
+MERCHANT_KEY = 'AE#KdScA6nKrrthk'
 
 
 # MERCHANT_KEY = '54TZc7g7tugpf6P_'
@@ -71,7 +71,7 @@ def cart(request):
         # return render(request, "add_to_cart/cart.html", {'thank': thank, 'id': id})
 
         param_dict = {
-            'MID': 'BYihPv14634030130981',
+            'MID': 'VtzYZw77873399463256',
             # 'MID': 'gwpJSJ13278899053257',
             'ORDER_ID': str(order.order_id),
             'TXN_AMOUNT': str(amount),

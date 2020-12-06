@@ -40,6 +40,17 @@
 
 
     <style>
+.navbar{
+box-shadow: 0 0 1px #333;
+  border-style: none;
+  background: linear-gradient(180deg, #4B48ED 0%,#0078a8 100%);
+  color: white;
+  opacity: 0.95;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+        }
+
 
 .sidenav {
   height: 100%;
@@ -618,17 +629,12 @@ document.getElementById('valabstract' + a).innerHTML = demn['abstract' + a][0];
 $('.divabstract').on("click", "button.plus", function(){
 
 
-
-
   a = this.id.slice(12, );
 
   demn["abstract" + a][0] = demn["abstract" + a][0] + 1;
   demn["abstract" + a][0] = Math.max(0, demn["abstract" + a][0]);
   document.getElementById('valabstract' + a).innerHTML = demn['abstract' + a][0];
   updateCart(demn);
-
-
-
 
 });
 

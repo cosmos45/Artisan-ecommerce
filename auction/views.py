@@ -22,7 +22,7 @@ def auction(request):
         bid1 = int(bid)
 
         subject = "Bid Succssfully Placed"
-        message = "Thankyou for bidding in the auction dated 8/10/2020. Your order details are: \n Name: " + username + "\n starting bid: " + str(
+        message = "Thankyou for bidding in the auction dated 6/10/2020. Your order details are: \n Name: " + username + "\n starting bid: " + str(
             ogval) + "\n Your bid: " + bid + "\n \n \n Yours sincerely, \n The Artisan"
 
         # value = request.POST.get('value', '')

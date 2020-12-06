@@ -1,9 +1,13 @@
+from django.contrib.auth import forms
 from django.db import models
 from twilio.rest import Client
 import pickle
 
 
+
+
 class Orders(models.Model):
+
     order_id = models.AutoField(primary_key=True)
     items_json = models.CharField(max_length=5000)
     amount = models.IntegerField(default=0)
@@ -27,14 +31,14 @@ class Orders(models.Model):
 
         print(field_value)
         number = '+91' + str(self.phone)
-        account_sid = 'ACb911497c1ab42c4779f0e9c128eb841e'
-        auth_token = 'a68fcee47996092bac561b8af216cb01'
+        account_sid = 'AC426a0c6231f62af9155f3ea2dfbf48d4'
+        auth_token = '93d00a0d792bdeb19bcf1c4727ff1f35'
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
 
             body=f'Thankyou for Shopping {name}!. Your orderId is {field_value}.You can use this ID to track your order.',
-            from_='+12055962400',
+            from_='+12056221509',
             to=number,
 
         )

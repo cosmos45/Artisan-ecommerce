@@ -40,149 +40,34 @@
 
 
     <style>
+    	@import url("https://fonts.googleapis.com/css?family=Poppins:wght@300;400;600;700&display=swap");
 
-.sidenav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  color: #fff;
-  background-color: #111;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+    body{
+    font-family:"Poppins", sans-serif !important;
+    }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 21px;
-  font-family: 'Merriweather Sans', sans-serif;
-  color: #818181;
-  display: block;
-}
-
-.sidenav a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
+    .navbar{
+         box-shadow: 0 0 1px #333;
+  border-style: none;
+  background: linear-gradient(180deg, #4B48ED 0%,#0078a8 100%);
   color: white;
-}
+  opacity: 0.95;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  margin-bottom:-40px;
+        }
 
-.main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
-    padding: 10px;
-}
 
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 20px;}
-  .sidenav a {font-size: 18px;}
-}
-
-body {
-   background-color: #fef5df;
-}
- .container {
-   width: 200px;
-   height: 300px;
-   top: 0;
-   right: 0;
-   left: 0;
-   bottom: 0;
-   margin-bottom: 20px;
-   margin-right: 20px`
-   background-color: black;
-   background-size: cover;
-   cursor: pointer;
-   -webkit-box-shadow: 0 0 5px #000;
-   box-shadow: 0 0 5px #000;
-}
- .overlay {
-   width: 115%;
-   height: 100%;
-   margin-left: -15px;
-   padding: 0px;
-   display: grid;
-   background: rgba(13, 13, 13, .7);
-   color:  #f2f2f2;
-   opacity: 0;
-   transition: all 0.2s;
-   font-family: 'Playfair Display', serif;
-}
- .items {
-    padding-left:15px;
-   letter-spacing: 3px;
-}
- .head {
-   margin-top: 10px;
-   font-size: 20px;
-   line-height: 20px;
-   transform: translateY(40px);
-   transition: all 0.2s;
-}
- .head hr {
-   display: block;
-   width: 0;
-   border: none;
-   border-bottom: solid 2px #fef5df;
-   bottom: 0;
-   margin: 0;
-   padding: 0;
-   left: 20px;
-   transition: all 0.2s;
-}
- .price {
-   font-size: 14px;
-   line-height: 10px;
-   font-weight: bold;
-   opacity: 0;
-   transform: translateY(40px);
-   transition: all 0.2s;
-}
- .price .old {
-   text-decoration: line-through;
-   color: #b3b3b3;
-}
- .cart {
-   font-size: 12px;
-   opacity: 0;
-   letter-spacing: 1px;
-   font-family: 'Lato', sans-serif;
-   transform: translateY(40px);
-   transition: all 0.2s;
-}
- .cart i {
-   font-size: 16px;
-}
- .cart span {
-   margin-left: 10px;
-}
- .container:hover .overlay {
-   opacity: 1;
-}
- .container:hover .overlay .head {
-   transform: translateY(0px);
-}
- .container:hover .overlay hr {
-   width: 90%;
-   transition-delay: 0.2s;
-}
- .container:hover .overlay .price {
-   transform: translateY(0px);
-   transition-delay: 0.2s;
-   opacity: 1;
-}
- .container:hover .overlay .cart {
-   transform: translateY(0px);
-   transition-delay: 0.2s;
-   opacity: 1;
-}
+    #mc_embed_signup{
+    background:#fff;
+    font:14px Helvetica,Arial,sans-serif;
+    width:100%;
+    }
 
 
 
-
-         #popcart{
+        #popcart{
             margin-top: 9px;
             background: transparent;
             color: white;
@@ -194,55 +79,8 @@ body {
             outline:none;
         }
 
-        #styling{
-          text-align: center;
-          padding:2px;
-          font-family: 'Merriweather Sans', sans-serif;
-          font-size: 20px;'
-        }
-
-
-.gradbt {
-  background-image: linear-gradient(to right,#0575E6 0%, #021B79 100%);
-  border-radius: 25px;
-  box-sizing: border-box;
-  color: #005acf;
-  font: 1vw 'Oswald', Arial, sans-serif; /*18*/
-  height: 35px;
-  letter-spacing: 1px;
-  padding: 2px;
-  margin-right: 18px;
-  text-decoration: none;
-  text-transform: uppercase;
-  width: 100px;
-  z-index: 2;
-  outline:none;
-}
-
-.gradbt:hover {
-  color: #fff;
-}
-
-.gradbt span {
-  align-items: center;
-  background: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  text-decoration: none;
-  transition: background .5s ease;
-  width: 100%;
-}
-
-.gradbt:hover span {
-  background: transparent;
-}
-
 
     </style>
-
-
 
 
 </head>
