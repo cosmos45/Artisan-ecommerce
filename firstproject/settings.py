@@ -29,8 +29,6 @@ SECRET_KEY = '76kvpf+i3r1$)wc#&!nds-5(^so3o*dji6*9rjd15=$r2lq_6n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
