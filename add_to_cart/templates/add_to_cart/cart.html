@@ -277,7 +277,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <div class="right">
+        <div id="right">
 
             <div id="feedback-form">
                 <h3 class="sectionHead">Shipping Information</h3>
@@ -331,7 +331,7 @@
     </div>
 
     <div class="col-md-6">
-        <div class="right">
+        <div id="right">
             <div id="feedback-form1">
                 <h2 class="sectionHead">Receipt</h2>
                 <div class="row" style="margin: 10px;">
@@ -362,13 +362,10 @@
                 </div>
 
                 <div class="row sectionHead3">
-
                     <div class="col-md-8 ">
                         Delivery charges
                     </div>
-                    <div class="col-md-2">
-
-                    </div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-2">
                         55.00
                     </div>
@@ -378,81 +375,29 @@
                     <div class="col-md-8 ">
                         Total
                     </div>
-                    <div class="col-md-2">
-
-                    </div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-2" id="totalPricelast">
-
                     </div>
-
                 </div>
-
-
-            </div>
-
-        </div>
-
-
-        <!-- <div >
-        {% if painting|length < 1 %}
-            <h4 class="jumbotron" style="margin-top:50px; text-align: center; " > ○ You have not added any product into your cart</h4>
-        {% else %}
-                <h4 class="jumbotron" style="margin-top:50px; text-align: center; "> ○ Items that you have added to your cart</h4>
-        {% endif %}
-        </div>
-         -->
-
-        <!--
-        {% for i in painting %}
-        <div class="row">
-            <div class="col-md-2">
-            </div>
-            <div class="col-md-2">
-                <img src="/media/{{i.image}}" alt="The image cannot be displayed" width="150px" style="margin-left: 20px;">
-            </div>
-            <div class="col-md-6">
-                <h1><b>{{i.name}}</b></h1>
-                <h5><b>{{i.artist}}</b> </h5>
-                <button  class="btn btn-danger btn-sm" type="submit" >Remove</button>
-            </div>
-            <div class="col-md-2">
-                <h4 class="new" style="margin-top:20px;">Rs. {{i.price}}</h4>
             </div>
         </div>
-           <hr> -->
-        <!-- {% endfor %}
-         -->
-
-
-        {% endblock %}
-
-
-        {% block js %}
-
-
-        <script type="text/javascript">
-
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
 
 if(localStorage.getItem('demn', 'shit') == null) {
   var demn = {};
   var shit = {};
-
-
-
-
 }
 else {
   demn = JSON.parse(localStorage.getItem('demn'));
   shit = JSON.parse(localStorage.getItem('shit'));
-
-
-
-
 }
 
 
 console.log(demn);
-
 console.log(shit);
 
 sum = 0;

@@ -4,25 +4,25 @@
 
 {% block head %}
 <head>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" rel="stylesheet">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    <script crossorigin="anonymous"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+    <link href="https://npmcdn.com/flickity@2/dist/flickity.css" rel="stylesheet" type="text/css">
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
 
@@ -32,10 +32,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kanit:200,400" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@1,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
 
 
@@ -80,6 +80,7 @@
         }
 
 
+
     </style>
 
 
@@ -98,227 +99,60 @@
 
 <center>
 
-    <p style="font-family: 'Noto Serif', serif; font-size: 3vw; text-align: center; ">Search Results for "{{ query }}"</p>
+    <p style="font-family: 'Noto Serif', serif; font-size: 3vw; text-align: center; ">Search Results for "{{ query
+        }}"</p>
     <hr style="width: 90%">
 
-    </center>
+</center>
 
-    <div class="row">
-        {% for i in painting %}
+<div class="row">
+    {% for i in painting %}
 
-        <div class="col-md-3 col-sm-4 col-xs-12">
-            <div class="container" style="background-image:url(/media/{{i.image}}); width: 250px; ">
-                <a href="/dyna/abstract_description/{{i.painting_id}}" style="text-decoration:none; color: white;">
-                    <div class="overlay">
-                        <div class="items"></div>
-                        <div class="items head">
-                            <p id="nameabstract{{i.painting_id}}"><b>{{i.name}}</b></p>
-                            <h5>{{i.artist}} </h5>
-                            <h6 style="padding: 5px;">{{i.small_description}}</h6>
-                            <div class="items price">
-                                <p class="old">Rs. {{i.cancelled_price}}</p>
-                                <p class="new">Rs.<span id="priceabstract{{i.painting_id}}">{{i.price}}</span></p>
-                            </div>
-                             </a>
-                            <br>
-                            <hr>
+    <div class="col-md-3 col-sm-4 col-xs-12">
+        <div class="container" style="background-image:url(/media/{{i.image}}); width: 250px; ">
+            <a href="/dyna/abstract_description/{{i.painting_id}}" style="text-decoration:none; color: white;">
+                <div class="overlay">
+                    <div class="items"></div>
+                    <div class="items head">
+                        <p id="nameabstract{{i.painting_id}}"><b>{{i.name}}</b></p>
+                        <h5>{{i.artist}} </h5>
+                        <h6 style="padding: 5px;">{{i.small_description}}</h6>
+                        <div class="items price">
+                            <p class="old">Rs. {{i.cancelled_price}}</p>
+                            <p class="new">Rs.<span id="priceabstract{{i.painting_id}}">{{i.price}}</span></p>
                         </div>
+            </a>
+            <br>
+            <hr>
+        </div>
 
 
-                            <div class="row">
-                                <div class="col-md-6 col-sm-5 col-xs-5" >
-                                      <div class="items cart">
+        <div class="row">
+            <div class="col-md-6 col-sm-5 col-xs-5">
+                <div class="items cart">
 
-                                           <span id="divabstract{{i.painting_id}}" class="divabstract">
-                        <button  id="abstract{{i.painting_id}}" class="btn btn-danger btn-sm demn">Add to Cart</button>
+                                           <span class="divabstract" id="divabstract{{i.painting_id}}">
+                        <button class="btn btn-danger btn-sm demn" id="abstract{{i.painting_id}}">Add to Cart</button>
                         </span>
 
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-7 col-xs-7" >
-                                    <div class="items cart">
-                                           <button class="btn btn-danger btn-sm">Buy Now</button>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                    </div>
-
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-7 col-xs-7">
+                <div class="items cart">
+                    <button class="btn btn-danger btn-sm">Buy Now</button>
+                </div>
             </div>
         </div>
-        {% endfor %}
 
 
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--        {% for i in wildlife %}-->
-<!--        <div class="col-md-3">-->
-<!--            <div class="container" style="background-image:url(/media/{{i.image}}); width: 250px; ">-->
-<!--                <a href="/dyna/wildlife_description/{{i.painting_id}}" style="text-decoration:none; color: white;">-->
-<!--                    <div class="overlay">-->
-<!--                        <div class="items"></div>-->
-<!--                        <div class="items head">-->
-<!--                            <p id="namewildlife{{i.painting_id}}"><b>{{i.name}}</b></p>-->
-<!--                            <h5>{{i.artist}} </h5>-->
-<!--                            <h6 style="padding: 5px;">{{i.small_description}}</h6>-->
-<!--                            <div class="items price">-->
-<!--                                <p class="old">Rs. {{i.cancelled_price}}</p>-->
-<!--                                <p  class="new">Rs. <span id="pricewildlife{{i.painting_id}}">  {{i.price}}</span></p>-->
-<!--                            </div>-->
-<!--                            </a>-->
-<!--                            <hr>-->
-<!--                        </div>-->
-
-<!--                        <div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="items cart">-->
-<!--<span id="divwildlife{{i.painting_id}}" class="divwildlife">-->
-<!--                        <button  id="wildlife{{i.painting_id}}" class="btn btn-danger btn-sm wild">Add to Cart</button>-->
-<!--                        </span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="items cart">-->
-
-<!--                                            <button class="btn btn-danger btn-sm">Buy Now</button>-->
-
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-
-<!--                    </div>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-
-
-
-
-
-<!--        {% endfor %}-->
-
-
-
-
-<!--        {% for i in pastelpainting %}-->
-<!--        <div class="col-md-3">-->
-<!--            <div class="container" style="background-image:url(/media/{{i.image}}); width: 250px; ">-->
-<!--                <a href="/dyna/pastel_description/{{i.painting_id}}" style="text-decoration:none; color: white;">-->
-<!--                    <div class="overlay">-->
-<!--                        <div class="items"></div>-->
-<!--                        <div class="items head">-->
-<!--                            <p id="namepastelpaint{{i.painting_id}}"><b>{{i.name}}</b></p>-->
-<!--                            <h5>{{i.artist}} </h5>-->
-<!--                            <h6 style="padding: 5px;">{{i.small_description}}</h6>-->
-<!--                            <div class="items price">-->
-<!--                                <p class="old">Rs. {{i.cancelled_price}}</p>-->
-<!--                                <p  class="new">Rs. <span id="pricepastelpaint{{i.painting_id}}">  {{i.price}}</span></p>-->
-<!--                            </div>-->
-<!--                            </a>-->
-<!--                            <hr>-->
-<!--                        </div>-->
-
-<!--                        <div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="items cart">-->
-<!--<span id="divpastelpaint{{i.painting_id}}" class="divpastelpaint">-->
-<!--                        <button  id="pastelpaint{{i.painting_id}}" class="btn btn-danger btn-sm pastel">Add to Cart</button>-->
-<!--                        </span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="items cart">-->
-
-<!--                                            <button class="btn btn-danger btn-sm">Buy Now</button>-->
-
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-
-<!--                    </div>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        {% endfor %}-->
-
-
-
-<!--{% for i in inkpainting %}-->
-<!--        <div class="col-md-3">-->
-<!--            <div class="container" style="background-image:url(/media/{{i.image}}); width: 250px; ">-->
-<!--                <a href="/dyna/ink_description/{{i.painting_id}}" style="text-decoration:none; color: white;">-->
-<!--                    <div class="overlay">-->
-<!--                        <div class="items"></div>-->
-<!--                        <div class="items head">-->
-<!--                            <p id="nameinkpaint{{i.painting_id}}"><b>{{i.name}}</b></p>-->
-<!--                            <h5>{{i.artist}} </h5>-->
-<!--                            <h6 style="padding: 5px;">{{i.small_description}}</h6>-->
-<!--                            <div class="items price">-->
-<!--                                <p class="old">Rs. {{i.cancelled_price}}</p>-->
-<!--                                <p  class="new">Rs. <span id="priceinkpaint{{i.painting_id}}">  {{i.price}}</span></p>-->
-<!--                            </div>-->
-<!--                            </a>-->
-<!--                            <hr>-->
-<!--                        </div>-->
-
-<!--                        <div>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="items cart">-->
-<!--                        <span id="divinkpaint{{i.painting_id}}" class="divinkpaint">-->
-<!--                        <button  id="inkpaint{{i.painting_id}}" class="btn btn-danger btn-sm ink">Add to Cart</button>-->
-<!--                        </span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="col-md-6">-->
-<!--                                    <div class="items cart">-->
-
-<!--                                            <button class="btn btn-danger btn-sm">Buy Now</button>-->
-
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-
-<!--                    </div>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        {% endfor %}-->
-
-
-
+</div>
+</div>
+{% endfor %}
 
 
 {% endblock %}
-
 
 
 {% block js %}
@@ -633,6 +467,7 @@ $('.divabstract').on("click", "button.plus", function(){
 
 
 });
+
 
 
 </script>

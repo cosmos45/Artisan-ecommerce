@@ -15,7 +15,6 @@ def auction(request):
         email = request.POST.get('email', '')
         bid = request.POST.get('bid', '')
 
-
         ogval = 12000
 
         og = int(ogval)
